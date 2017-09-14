@@ -13,25 +13,23 @@ namespace Lupi.WebApi.Controllers
     [RoutePrefix("api")]
     public class BreedController : CommonApiController
     {
-        private BreedBusinessLogic businessLogic;
-        public BreedController()
+        private IBreedBusinessLogic businessLogic;
+
+        public BreedController(IBreedBusinessLogic logic)
         {
-            businessLogic = new BreedBusinessLogic();
+            businessLogic = logic;
         }
 
         // GET: api/Breeds
         public IHttpActionResult Get()
         {
-
             return Ok(businessLogic.Get());
-
         }
 
         // GET: api/Breed/5
         public IHttpActionResult Get(Guid id)
         {
             return Ok(businessLogic.Get(id));
-            
         }
 
         // POST: api/Breed
@@ -45,7 +43,7 @@ namespace Lupi.WebApi.Controllers
         [HttpGet]
         public IHttpActionResult Get(Guid breedId, int hairId)
         {
-            if(hairId == 1)
+            if (hairId == 1)
             {
                 return Ok("Wonderful redish color!");
             }
